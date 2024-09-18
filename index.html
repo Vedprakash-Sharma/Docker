@@ -64,15 +64,49 @@
 
         /* Carousel */
         .carousel {
-            margin: 20px 0;
-            max-width: 100%;
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto;
             overflow: hidden;
+            position: relative;
         }
 
-        .carousel img {
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: 300%;
+        }
+
+        .carousel-inner img {
             width: 100%;
-            height: 400px;
             object-fit: cover;
+            height: 400px;
+        }
+
+        /* Carousel controls */
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: 30px;
+            height: 30px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            transform: translateY(-50%);
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
         }
 
         /* Categories Section */
@@ -178,9 +212,15 @@
         </div>
     </header>
 
-    <!-- Carousel -->
+    <!-- Carousel Section -->
     <div class="carousel">
-        <img src="https://via.placeholder.com/1200x400.png?text=Banner+1" alt="Banner">
+        <div class="carousel-inner">
+            <img src="https://via.placeholder.com/1200x400/ff7f7f/333333?text=Banner+1" alt="Banner 1">
+            <img src="https://via.placeholder.com/1200x400/7f7fff/ffffff?text=Banner+2" alt="Banner 2">
+            <img src="https://via.placeholder.com/1200x400/7fff7f/000000?text=Banner+3" alt="Banner 3">
+        </div>
+        <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+        <button class="next" onclick="moveSlide(1)">&#10095;</button>
     </div>
 
     <!-- Categories Section -->
@@ -210,31 +250,31 @@
     <!-- Product Grid -->
     <section class="products">
         <div class="product">
-            <img src="https://via.placeholder.com/200.png?text=Product+1" alt="Product 1">
-            <h3>Product 1</h3>
-            <p>Short description of product 1.</p>
-            <div class="price">$99</div>
+            <img src="https://via.placeholder.com/200.png?text=Diary" alt="Diary">
+            <h3>Diary</h3>
+            <p>High-quality notebook for personal or business use.</p>
+            <div class="price">$5</div>
             <button>Add to Cart</button>
         </div>
         <div class="product">
-            <img src="https://via.placeholder.com/200.png?text=Product+2" alt="Product 2">
-            <h3>Product 2</h3>
-            <p>Short description of product 2.</p>
-            <div class="price">$149</div>
+            <img src="https://via.placeholder.com/200.png?text=Phone" alt="Phone">
+            <h3>Smartphone</h3>
+            <p>Latest smartphone with advanced features and powerful performance.</p>
+            <div class="price">$299</div>
             <button>Add to Cart</button>
         </div>
         <div class="product">
-            <img src="https://via.placeholder.com/200.png?text=Product+3" alt="Product 3">
-            <h3>Product 3</h3>
-            <p>Short description of product 3.</p>
-            <div class="price">$199</div>
+            <img src="https://via.placeholder.com/200.png?text=Bottle" alt="Bottle">
+            <h3>Water Bottle</h3>
+            <p>Insulated water bottle to keep drinks cool for hours.</p>
+            <div class="price">$15</div>
             <button>Add to Cart</button>
         </div>
         <div class="product">
-            <img src="https://via.placeholder.com/200.png?text=Product+4" alt="Product 4">
-            <h3>Product 4</h3>
-            <p>Short description of product 4.</p>
-            <div class="price">$249</div>
+            <img src="https://via.placeholder.com/200.png?text=Charger" alt="Charger">
+            <h3>Phone Charger</h3>
+            <p>Fast charging adapter compatible with most smartphones.</p>
+            <div class="price">$20</div>
             <button>Add to Cart</button>
         </div>
     </section>
@@ -244,5 +284,14 @@
         <p>&copy; 2024 Vedanda Bharat. All rights reserved. | <a href="#">Terms of Use</a> | <a href="#">Privacy Policy</a></p>
     </footer>
 
-</body>
-</html>
+    <script>
+        let slideIndex = 0;
+        const slides = document.querySelector('.carousel-inner');
+        const totalSlides = slides.children.length;
+
+        function moveSlide(direction) {
+            slideIndex += direction;
+            if (slideIndex < 0) {
+                slideIndex = totalSlides - 1;
+            } else if (slideIndex >= totalSlides) {
+                slideIndex =
