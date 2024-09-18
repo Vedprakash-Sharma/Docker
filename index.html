@@ -180,6 +180,60 @@
             border-radius: 4px;
         }
 
+        /* Login Section */
+        .login-section {
+            max-width: 600px;
+            margin: 30px auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-section h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .login-section form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .login-section form input[type="text"],
+        .login-section form input[type="password"] {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .login-section form input[type="file"] {
+            margin-bottom: 15px;
+        }
+
+        .login-section form button {
+            padding: 10px;
+            background-color: #2874f0;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        /* Profile Image Preview */
+        .image-preview {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .image-preview img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            display: none;
+        }
+
         /* Footer */
         footer {
             background-color: #333;
@@ -247,6 +301,22 @@
         </div>
     </section>
 
+    <!-- Login Section -->
+    <section class="login-section">
+        <h2>Login</h2>
+        <form id="login-form">
+            <input type="text" id="username" name="username" placeholder="Username" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <input type="file" id="profilePic" name="profilePic" accept="image/*" onchange="previewImage(event)">
+            
+            <div class="image-preview" id="imagePreview">
+                <img id="imagePreviewImg" alt="Profile Picture Preview">
+            </div>
+
+            <button type="submit">Login</button>
+        </form>
+    </section>
+
     <!-- Product Grid -->
     <section class="products">
         <div class="product">
@@ -294,4 +364,29 @@
             if (slideIndex < 0) {
                 slideIndex = totalSlides - 1;
             } else if (slideIndex >= totalSlides) {
-                slideIndex =
+                slideIndex = 0;
+            }
+            slides.style.transform = `translateX(-${slideIndex * 100}%)`;
+        }
+
+        // Image Preview Function
+        function previewImage(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            const imagePreview = document.getElementById('imagePreview');
+            const imagePreviewImg = document.getElementById('imagePreviewImg');
+
+            if (file) {
+                reader.onload = function(e) {
+                    imagePreviewImg.src = e.target.result;
+                    imagePreviewImg.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            } else {
+                imagePreviewImg.src = '';
+                imagePreviewImg.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
